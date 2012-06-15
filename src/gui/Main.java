@@ -12,7 +12,10 @@ public class Main {
     }
     
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+        if(args.length > 0 && args[0].compareToIgnoreCase("noPertelian") == 0){
+        	Pertelian.setActivation(false);
+        }
+    	SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 MainFrame frame = new MainFrame();
                 frame.setLocationRelativeTo(null);

@@ -13,7 +13,5 @@
 	<classpathentry kind="lib" path="lib/PertelianLib2.jar"/>
 	<classpathentry kind="lib" path="lib/saaj.jar"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/home/reivax/Bureau/eclipse/plugins/javax.wsdl_1.5.1.v200806030408.jar"/>
-	<classpathentry kind="lib" path="/home/reivax/Bureau/eclipse/plugins/org.apache.commons.logging_1.0.4.v200904062259.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

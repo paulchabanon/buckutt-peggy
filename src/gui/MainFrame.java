@@ -18,10 +18,10 @@ import java.io.*;
 import java.rmi.RemoteException;
 
 import javax.swing.*;
+import javax.xml.rpc.ServiceException;
 
-//A COMMENTER POUR CHANGER DE SERVEUR PROD OU DEV
-import org.dyndns.buckutt.server.PBUY_class_php.PBUYPortProxy;
-//import _1._10._10._10.PBUY_class_php.PBUYPortProxy;
+//CHANGER ICI L'ADRESSE DU SERVEUR
+import localhost.PBUY_class_php.*;
 
 
 
@@ -43,7 +43,7 @@ public class MainFrame extends JFrame implements KeyListener {
     private static VentePanel ventePanel;
     private static String fenetreActive;
     public static Vendeur vendeur;
-    public static PBUYPortProxy PBUY = new PBUYPortProxy();
+    public static PBUYPort PBUY = null;
     public static int id_point;
     public static String nom_point;
     private String codeEtu = "";
@@ -103,7 +103,14 @@ public class MainFrame extends JFrame implements KeyListener {
      */
     public static void showConnexionPanel() {
     	
-    	PBUY = new PBUYPortProxy();
+    	try {
+	    	PBUYServiceLocator service = new PBUYServiceLocator();
+	    	service.setMaintainSession(true);
+	    	PBUY = service.getPBUYPort();
+    	} catch (ServiceException e) {
+    		e.printStackTrace();
+    	}
+    	
     	updateIdPoint();
     	
     	content.setVisible(false);

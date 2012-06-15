@@ -12,6 +12,11 @@ import java.io.InputStreamReader;
  * @version 1.0
  */
 public class Pertelian {
+	private static boolean pertelianActivated = true;
+	public static void setActivation(boolean active){
+		pertelianActivated = active;
+	}
+	
 	  /**
      * Satus du pertelian.
      * <p>
@@ -21,6 +26,9 @@ public class Pertelian {
      * </p>
      */
 	public static boolean GetStatus(){
+		if(!pertelianActivated)
+			return false;
+		
 		Process p;
 		try {
 			p = Runtime.getRuntime().exec("sh /etc/init.d/pertd status");

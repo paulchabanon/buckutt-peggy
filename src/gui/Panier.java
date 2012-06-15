@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.util.*;
+import gui.*;
 
 public class Panier {
 	

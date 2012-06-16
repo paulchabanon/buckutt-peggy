@@ -21,10 +21,10 @@ import javax.swing.*;
 import javax.xml.rpc.ServiceException;
 
 //CHANGER ICI L'ADRESSE DU SERVEUR
-//import localhost.BuckUTT.server.PBUY_class_php.*;
+import localhost.BuckUTT.server.PBUY_class_php.*;
 
 //VERSION POUR LA COMPIL PAR SCRIPT
-import axis.*;
+//import axis.*;
 
 
 

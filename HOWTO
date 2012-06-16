@@ -3,14 +3,6 @@ compiler peggy pour les nuls sur debian
 
 Toutes les commandes sont à éxectuer dans le dossier racine de peggy
 
-Récupérer la WSDL de PBUY
- wget serveur_de_votre_choix/chemin/PBUY.class.php?wdsl
-e.g Sur le serveur de boris
- wget localhost/server/PBUY.class.php?wsdl
-
-renomer le fichier crée en PBUY.wsdl
- mv PBUY.class.php?wsdl PBUY.wsdl
-
 pour générer la WSDL
  ./generate_wsdl.sh "adresse_serveur"
  

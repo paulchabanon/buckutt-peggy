@@ -15,5 +15,5 @@ echo $chemin
 echo $chemin2
 sed -i "s/${chemin2}PBUY_class_php/axis/g" ../axis/*.java
 cd ..
-#rm -rf temp/
+rm -rf temp/
 rm -f ../temp.wsdl

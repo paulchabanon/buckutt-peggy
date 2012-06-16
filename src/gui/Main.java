@@ -12,9 +12,6 @@ public class Main {
     }
     
     public static void main(String[] args) {
-        if(args.length > 0 && args[0].compareToIgnoreCase("noPertelian") == 0){
-        	Pertelian.setActivation(false);
-        }
     	SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 MainFrame frame = new MainFrame();

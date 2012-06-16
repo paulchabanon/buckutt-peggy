@@ -26,15 +26,13 @@ public class Pertelian {
      * </p>
      */
 	public static boolean GetStatus(){
-		if(!pertelianActivated)
-			return false;
-		
+
 		Process p;
 		try {
 			p = Runtime.getRuntime().exec("sh /etc/init.d/pertd status");
 			BufferedReader d = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String toto=d.readLine();
-			if (toto.equals("demarrer")){
+			if (toto != null && toto.equals("demarrer")){
 				return true;
 			}else{
 				return false;

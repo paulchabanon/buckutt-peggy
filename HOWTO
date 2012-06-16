@@ -3,7 +3,7 @@ compiler peggy pour les nuls sur debian
 
 Toutes les commandes sont à éxectuer dans le dossier racine de peggy
 
-pour générer la WSDL
+pour générer le code d'axis à partir de la WSDL
  ./generate_wsdl.sh "adresse_serveur"
  
 e.g pour http://buckutt.boriszanetti.com/server/
@@ -13,3 +13,19 @@ Ne pas mettre le http:// et ne pas oublier de terminer par un /
 pour compiler utiliser compile.sh en précisant le nom du jar en paramètre
  ./compile.sh Peggy2-1.jar
   
+HOWTO
+compiler peggy pour les nuls avec eclipse en clic-clic sous windows & autres OS
+
+Télécharger la WSDL à partir du serveur que vous souhaitez utiliser 
+ou bien faites un rechercher/remplacer de l'url sur la wsdl fournit
+(n'noubliez pas de préciser le port si différent de 80)
+
+Renomer le fichier en PBUY.wsdl si nécessaire
+
+exécuter generate_wsdl.bat
+
+éditer le fichier src/gui/MainFrame.java
+changer la ligne d'import pour pointer vers vos fichiers généres
+INFO: http://test.buckutt.com/server/
+deviendra: import com.buckutt.test.server.PBUY_class_php.*;
+

@@ -1,7 +1,7 @@
 HOWTO
 compiler peggy pour les nuls sur debian
 
-Toutes les commandes sont à éxectuer dans le dossier racine de peggy
+Toutes les commandes sont à exéctuer dans le dossier racine de peggy
 
 pour générer le code d'axis à partir de la WSDL
  ./generate_wsdl.sh "adresse_serveur"
@@ -21,6 +21,9 @@ ou bien faites un rechercher/remplacer de l'url sur la wsdl fournit
 (n'noubliez pas de préciser le port si différent de 80)
 
 Renomer le fichier en PBUY.wsdl si nécessaire
+Si vous utilisez un PBUY.wsdl déjà existant faites un rechercher/remplacer de 
+"http://localhost/PBUY.wsdl" pour l'url correspondant à votre serveur
+ 
 
 exécuter generate_wsdl.bat
 

@@ -231,26 +231,30 @@ public class ConnexionPanel extends ContentPanel {
         JButton boutonOk = new JButton();
         boutonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if (MainFrame.vendeur.validConnexion(digicodeMDP.getCode(), mean_of_log)) {
-            		annuleUser();
-            		digicodeMDP.clearEcran();
-            		if (MainFrame.vendeur.isPointMan()) {
-            			JLabelAide(3);
-            			addChoixAdmin();
-            		}
-            		else {
-            			MainFrame.showVentePanel(idEtu);
-            		}
-            	}
-            	else {	
-            		digicodeMDP.codeErreur();
-            	}
+            	performeLogin(digicodeMDP.getCode());
             }
         });
         digicodeMDP.addBoutonOk(boutonOk);
         blocDigicode.add(digicodeMDP.affiche());
         
         return blocDigicode;
+    }
+    
+    public void performeLogin(String mdp) {
+    	if (MainFrame.vendeur.validConnexion(mdp, mean_of_log)) {
+	    	annuleUser();
+			digicodeMDP.clearEcran();
+			if (MainFrame.vendeur.isPointMan()) {
+				JLabelAide(3);
+				addChoixAdmin();
+			}
+			else {
+				MainFrame.showVentePanel(idEtu);
+			}
+    	}
+    	else {	
+    		digicodeMDP.codeErreur();
+    	}
     }
     
     //Boutons pour choisir les options si on est admin

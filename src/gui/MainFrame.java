@@ -11,16 +11,23 @@ package gui;
  * 
  * @author reivax
  */
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.Scanner;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.xml.rpc.ServiceException;
 
-//CHANGER ICI L'ADRESSE DU SERVEUR
+//VERSION POUR LA COMPIL PAR ECLIPSE
 import localhost.BuckUTT.server.PBUY_class_php.*;
 
 //VERSION POUR LA COMPIL PAR SCRIPT
@@ -36,9 +43,11 @@ public class MainFrame extends JFrame implements KeyListener {
 	/**
 	 *
 	 */
+	public static MainFrame getInstance(){ return instance; }
 	private static final long serialVersionUID = 1L;
 	public static int width; //largeur de la fenetre
     public static int height; //hauteur de l'écran
+    private static MainFrame instance = null;
     private boolean eeeTop = true; //true pour dimension eeeTop, false pour s'adapter direct à l'écran... utile pour voir ce que ça rendrait sur un eeeTop pendant le développement
     private static JPanel content;
     private static JPanel footer;
@@ -52,12 +61,14 @@ public class MainFrame extends JFrame implements KeyListener {
     private String codeEtu = "";
     public static String ip = "";
     public static String versionPeggy = "DEV V2.1E";
+    public static String backgroundText = "BETA";
     
     /** 
      * Création de la fenêtre principale et du footer.
      */
     public MainFrame() {
     	super();
+    	instance = this;
     	
         if(eeeTop) {
             setSize(1366,768);
@@ -134,6 +145,16 @@ public class MainFrame extends JFrame implements KeyListener {
     	content.setVisible(true);
     	
     	fenetreActive = "connexion";
+    	
+	   	//performe autologin
+	   	String[] autolog = getAutoLogin();
+	   	if(autolog == null)
+	   		return;
+	   	
+	   	for(char c : autolog[0].toCharArray())
+	   		getInstance().loginKeyInput(c);
+	   	
+	   	connexionPanel.performeLogin(autolog[1]);
     }
     
     /**
@@ -191,12 +212,40 @@ public class MainFrame extends JFrame implements KeyListener {
 		}
     }
     
-    public void keyPressed(KeyEvent evt){ } //obligé de la mettre
-    public void keyReleased(KeyEvent evt){ }  //obligé de la mettre
-    public void keyTyped(KeyEvent ev) { //là, c'est la méthode qu'on modifie pour faire genre quelqu'un a badgé...  	
-    	char c = ev.getKeyChar();
+    /**
+     * Permet de s'auto loguer pour aller plus vite lorsqu'on test
+     * Le fichier doit s'appeller auto_login 
+     * être sur deux lignes sous la forme:
+     * mon mol4 + clé
+     * mon code
+     */
+    public static String[] getAutoLogin(){
+    	String info[] = {"", ""};
+             
+        try {
+			Scanner s = new Scanner(new File("auto_login"));
+			String line = null;
+			if((line = s.next()) != null  && line != "")
+				info[0] = line;
+			
+			if((line = s.next()) != null && line != "")
+				info[1] = line;
+			
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
         
-        if (Character.getNumericValue(c) != -1) {
+        return info;
+    }
+    
+    /**
+     * Pour chaque touche tapé par l'utilisateur
+     * (ou entrée badgeuse)
+     */
+    private void loginKeyInput(char c){
+    	if (Character.getNumericValue(c) != -1) {
         	codeEtu += Character.getNumericValue(c);
         }
         
@@ -220,6 +269,12 @@ public class MainFrame extends JFrame implements KeyListener {
             }
             codeEtu = "";
         }
+    }
+    
+    public void keyPressed(KeyEvent evt){ } //obligÃ© de la mettre
+    public void keyReleased(KeyEvent evt){ }  //obligÃ© de la mettre
+    public void keyTyped(KeyEvent ev) { //lÃ , c'est la mÃ©thode qu'on modifie pour faire genre quelqu'un a badgÃ©...  	
+    	loginKeyInput(ev.getKeyChar());
     }
 
 }
